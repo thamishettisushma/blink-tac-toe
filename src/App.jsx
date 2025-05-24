@@ -1,37 +1,33 @@
+
 import React, { useState } from "react";
 import FrontPage from "./Components/FrontPage";
 import EmojiSelector from "./Components/EmojiSelector";
 import CategorySelector from "./Components/CategorySelector";
 import GameBoard from "./Components/GameBoard";
 import WinnerDialog from "./Components/WinnerDialog";
+import HelpPage from "./Components/HelpPage";
 import "./App.css";
-
-// const emojiCategories = {
-//   Fruits: ["🍎", "🍌", "🍇", "🍉", "🍓", "🍍", "🥭", "🍒", "🍑"],
-//   Animals: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨"],
-//   Sports: ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🥏", "🏓"],
-// };
 
 const emojiCategories = {
   Fruits: ["🍎", "🍌", "🍇", "🍉", "🍓", "🍍", "🥭", "🍒", "🍑"],
   Animals: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨"],
-  Sports: ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🥏", "🏓"],
-  Food: ["🍕", "🍔", "🍟", "🌮", "🍣", "🥐", "🍦", "🍰", "🥗"],
+  Sports: ["⚽", "🏀", "🏈", "⚾", "🎾", "🏐", "🏉", "🤏", "🏓"],
+  Food: ["🍕", "🍔", "🍟", "🌮", "🍣", "🥐", "🍦", "🍰", "🥑"],
   Weather: ["☀️", "🌧️", "⛈️", "🌞", "🌙", "⭐", "🌈", "❄️", "🌪️"],
   Vehicles: ["🚗", "🚲", "✈️", "🚂", "🚌", "🚤", "🚀", "🚁", "🛴"],
-  Music: ["🎵", "🎶", "🎤", "🎸", "🥁", "🎹", "🎻", "🎧", "🎺"],
+  Music: ["🎵", "🎶", "🎤", "🎸", "🪁", "🎹", "🎻", "🎧", "🎺"],
   Nature: ["🌳", "🌸", "🌻", "🌴", "🌵", "🍂", "🌊", "🏔️", "🌋"]
 };
 
 const winningLines = [
-  [0, 1, 2], // rows
+  [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
-  [0, 3, 6], // columns
+  [0, 3, 6],
   [1, 4, 7],
   [2, 5, 8],
-  [0, 4, 8], // diagonals
-  [2, 4, 6],
+  [0, 4, 8],
+  [2, 4, 6]
 ];
 
 export default function BlinkTacToe() {
@@ -100,16 +96,12 @@ export default function BlinkTacToe() {
         }
       }
     }
-
-    if (newBoard.every((cell) => cell !== null)) return "Draw";
-
     return null;
   }
 
   function handlePlaceEmoji(index, emoji) {
     const currentPlayerEmojis = currentPlayer === 1 ? player1Emojis : player2Emojis;
     const currentPlayerPositions = currentPlayer === 1 ? player1Positions : player2Positions;
-    const currentMoveCount = playerMoveCount[currentPlayer];
 
     let newBoard = [...board];
     let newPositions = [...currentPlayerPositions];
@@ -129,7 +121,7 @@ export default function BlinkTacToe() {
 
     setPlayerMoveCount((prev) => ({
       ...prev,
-      [currentPlayer]: prev[currentPlayer] + 1,
+      [currentPlayer]: prev[currentPlayer] + 1
     }));
 
     const result = checkGameWinner(newBoard);
@@ -158,7 +150,9 @@ export default function BlinkTacToe() {
   return (
     <div className={view === "front" ? "front-page" : "App"}>
       {view === "front" ? (
-        <FrontPage onStart={() => setView("game")} />
+        <FrontPage onStart={() => setView("game")} onHelp={() => setView("help")} />
+      ) : view === "help" ? (
+        <HelpPage onStart={() => setView("game")} />
       ) : (
         <>
           <h2>Blink Tac Toe</h2>

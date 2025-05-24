@@ -445,3 +445,53 @@ strong {
   .winner-dialog button { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
   p { font-size: 0.8rem; }
 }
+
+
+/* help */
+.help{
+  text-align: left !important;
+}
+.text{
+  text-align: center !important;
+}
+.button-outline {
+  background: #d63031;
+  border: 2px solid #d63031;
+  color: white;
+  padding: 0.6rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-outline:hover {
+  background: #d63031;
+  color: white;
+  transform: scale(1.05);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .board {
+    grid-template-columns: repeat(3, 4rem);
+  }
+  .cell {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.6rem;
+  }
+}
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.help-page {
+  animation: slideUpFade 0.6s ease-out;
+}
